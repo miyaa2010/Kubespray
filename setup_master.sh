@@ -33,6 +33,10 @@ systemctl disable firewalld >/dev/null 2>&1
 sudo setenforce 0
 sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
+## off swap
+sed -i '/swap/d' /etc/fstab
+swapoff -a
+
 ## Fix ssh weak
 echo "
 KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256
@@ -60,3 +64,15 @@ echo "
 192.168.10.19 giangnh-rancher
 192.168.10.20 giangnh-cicd " >> /etc/hosts
 sysctl -p
+
+##Setup docker
+# Cai dat Docker
+yum install -y yum-utils device-mapper-persistent-data lvm2
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum update -y && yum install docker-ce -y 
+usermod -aG docker $(whoami)
+
+# Restart Docker
+systemctl enable docker.service
+systemctl daemon-reload
+systemctl restart docker
