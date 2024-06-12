@@ -65,6 +65,8 @@ echo "
 192.168.10.20 giangnh-cicd " >> /etc/hosts
 sysctl -p
 
+su - sysadm
+sudo usermod -aG docker sysadm
 ##Setup docker
 # Cai dat Docker
 yum install -y yum-utils device-mapper-persistent-data lvm2
@@ -76,3 +78,5 @@ usermod -aG docker $(whoami)
 systemctl enable docker.service
 systemctl daemon-reload
 systemctl restart docker
+
+reboot
