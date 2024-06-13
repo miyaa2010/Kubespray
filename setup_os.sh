@@ -54,25 +54,22 @@ targetUri = 10.6.12.30:8089
 EOF
 
 echo "
-192.168.10.11 giangnh-master1
-192.168.10.12 giangnh-master2
-192.168.10.13 giangnh-master3
-192.168.10.14 giangnh-worker1
-192.168.10.15 giangnh-worker2
-192.168.10.16 giangnh-worker3
-192.168.10.18 giangnh-gitlab
-192.168.10.19 giangnh-rancher
-192.168.10.20 giangnh-cicd " >> /etc/hosts
+10.6.13.113 giangnh-master1
+10.6.13.114 giangnh-master2
+10.6.13.115 giangnh-master3
+10.6.13.116 giangnh-worker1
+10.6.13.117 giangnh-worker2
+10.6.13.118 giangnh-worker3
+10.6.13.119 giangnh-kubespray" >> /etc/hosts
 sysctl -p
 
-su - sysadm
-sudo usermod -aG docker sysadm
 ##Setup docker
 # Cai dat Docker
 yum install -y yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum update -y && yum install docker-ce -y 
-usermod -aG docker $(whoami)
+su - sysadm
+sudo usermod -aG docker $(whoami)
 
 # Restart Docker
 systemctl enable docker.service
