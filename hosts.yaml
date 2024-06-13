@@ -1,0 +1,36 @@
+[all]
+giangnh-master1  ansible_host=10.6.13.113      ip=10.6.13.113
+giangnh-master2  ansible_host=10.6.13.114      ip=10.6.13.114
+giangnh-master3  ansible_host=10.6.13.115      ip=10.6.13.115
+giangnh-worker1  ansible_host=10.6.13.116      ip=10.6.13.116
+giangnh-worker2  ansible_host=10.6.13.117      ip=10.6.13.117
+giangnh-worker3  ansible_host=10.6.13.118      ip=10.6.13.118
+                             
+[kube-master]
+giangnh-master1
+giangnh-master2
+giangnh-master3
+
+[kube-node]
+giangnh-worker1
+giangnh-worker2
+giangnh-worker3
+
+[etcd]
+giangnh-master1
+giangnh-master2
+giangnh-master3
+
+[k8s-cluster:children]
+kube-node
+kube-master
+
+[calico-rr]
+
+[vault]
+giangnh-master1
+giangnh-master2
+giangnh-master3
+giangnh-worker1
+giangnh-worker2
+giangnh-worker3
