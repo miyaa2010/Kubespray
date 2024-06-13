@@ -51,12 +51,7 @@ kube_network_plugin: calico
 Thành
 kube_network_plugin: flannel
 
-docker run --rm -it --mount type=bind,source=/home/sysadm/kubernetes_installation/kubespray/inventory/giangnh-cluster,dst=/inventory \
-  --mount type=bind,source=/home/sysadm/.ssh/id_rsa,dst=/root/.ssh/id_rsa \
-  --mount type=bind,source=/home/sysadm/.ssh/id_rsa,dst=/home/sysadm/.ssh/id_rsa \
-  quay.io/kubespray/kubespray:v2.25.0 bash 
-
-docker run --rm -it --mount type=bind,source=/home/sysadm/kubernetes_installation/kubespray/inventory/giangnh-cluster,dst=/inventory quay.io/kubespray/kubespray:v2.16.0 bash
+docker run --rm -it --mount type=bind,source=/home/sysadm/kubernetes_installation/kubespray/inventory/giangnh-cluster,dst=/inventory quay.io/kubespray/kubespray:v2.25.0 bash
 
 ansible-playbook -i /inventory/hosts.yaml cluster.yml --user=sysadm --ask-pass --become --ask-become-pass
 
